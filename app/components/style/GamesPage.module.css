@@ -1,0 +1,80 @@
+
+.gamecard{
+    align-items: center;
+    width: min(1000px, 90%);
+    margin: 2rem auto;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    background: var(--backgrond);
+    display: flex;
+    gap: clamp(1rem, 5vw, 5rem);
+    border: 1px solid var(--foreground);
+}
+
+.gamecardinfo{
+    width: 80%;
+    margin: 2rem auto;
+    padding: 1.25rem;
+    border-radius: 0.5rem;
+    background: var(--backgrond);
+    display: flex;
+}
+
+.imageContainer {
+    position: relative;
+    width: clamp(140px, 9vw, 160px);
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    flex-shrink: 0;
+    border-radius: 1rem;
+}
+
+.imageContainerinfo {
+    position: relative;
+    width: clamp(200px, 50vw, 400px);
+    aspect-ratio: 8 / 10;
+    overflow: hidden;
+    border-radius: 1rem;
+    margin: 2rem auto;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: var(--textcolor);
+}
+
+.buttoninfo {
+    text-align: center;
+    width: fit-content;
+    text-decoration: none;
+    color: var(--textcolor);
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--foreground);
+    border-radius: 0.5rem;
+    background: var(--backgrond);
+    cursor: pointer;
+}
+
+.buttoninfo:hover {
+    background: var(--hover);
+    text-decoration: none;
+}
+
+.info p{
+    font-size: clamp(0.5rem, 4vw, 1.2rem);
+}
+
+.toolbar {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.buttons{
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem auto;
+}
