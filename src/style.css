@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+.h1 {
+    @apply text-purple-600 text-4xl text-center font-bold;
+}
+
+.p {
+    @apply text-white text-center text-left text-2xl mt-10;
+}
+
+.main-div{
+    @apply flex flex-col items-center pt-10;
+}
+
+.list-gamecard{
+    @apply w-40 h-50 object-cover rounded-lg;
+}
+
+.button{
+    @apply text-white border border-purple-500 rounded-lg p-2 m-3 text-xl hover:text-black hover:bg-purple-600 cursor-pointer;
+}
