@@ -13,6 +13,15 @@ export const useGameStore = defineStore('games', {
 
         deleteGame(id: number) {
             this.games = this.games.filter(game => game.id !== id)
+        },
+
+        editGame(updatedGame: GameType) {
+            const index = this.games.findIndex(
+                game => game.id === updatedGame.id
+            )
+            if (index !== -1) {
+                this.games[index] = updatedGame
+            }
         }
     }
 })
