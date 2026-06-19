@@ -6,7 +6,7 @@
             class="button">
             Добавить игру
         </router-link>
-        <Gamecard v-for="(game, index) in store.games" :game="game" :key="index" :index="index"/>
+        <Gamecard v-for="game in store.games" :game="game" :key="game.id"/>
     </div>
 </template>
 

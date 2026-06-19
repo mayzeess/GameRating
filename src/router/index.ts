@@ -3,6 +3,8 @@ import about from '@/views/about.vue'
 import home from '@/views/home.vue'
 import game from '@/views/game.vue'
 import addgame from '@/views/addgame.vue'
+import infogame from '@/components/infogame.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -25,6 +27,11 @@ const router = createRouter({
       path: '/addgame',
       name: 'addgame',
       component: addgame 
+    },
+    {
+      path: '/game/:id',
+      name: 'infogame',
+      component: infogame 
     }
   ],
 })

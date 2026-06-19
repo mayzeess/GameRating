@@ -11,8 +11,8 @@ export const useGameStore = defineStore('games', {
             this.games.push(game)
         },
 
-        deleteGame(index: number) {
-            this.games.splice(index, 1)
+        deleteGame(id: number) {
+            this.games = this.games.filter(game => game.id !== id)
         }
     }
 })

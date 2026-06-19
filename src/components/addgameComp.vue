@@ -42,6 +42,7 @@ const addGame = () => {
     }
     
     store.addGame({
+        id: Date.now(),
         image: imageGame.value,
         name: nameGame.value,
         rating: ratingGame.value,
