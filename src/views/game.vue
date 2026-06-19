@@ -10,17 +10,10 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import Gamecard from '@/components/gamecard.vue';
 import { useGameStore } from '@/stores/gameStore'
 
-export default {
-    components: {Gamecard},
+const store = useGameStore()
 
-    setup () {
-        const store = useGameStore()
-
-        return {store}
-    }
-}
 </script>

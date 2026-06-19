@@ -5,10 +5,7 @@
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import AddgameComp from '@/components/addgameComp.vue';
 
-export default {
-    components: {AddgameComp}
-}
 </script>

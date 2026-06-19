@@ -12,7 +12,4 @@
 
 <script>
 
-export default {
-  
-}
 </script>

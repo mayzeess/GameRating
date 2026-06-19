@@ -5,59 +5,57 @@
             <input class="border-2 border-purple-500 rounded-md" type="number" placeholder="Рейтинг" v-model="ratingGame">
             <input class="border-2 border-purple-500 rounded-md" type="text" placeholder="Комментарий" v-model="commentGame">
     </form>
-    <button class="button" @click="Addgame()">
+    <button class="button" @click="addGame()">
         Добавить
     </button>
     <p class="p" v-if="(info != '')">{{ info }}</p>
 </template>
 
-<script>
+<script setup lang="ts">
 import { useGameStore } from '@/stores/gameStore'
+import { ref } from 'vue'
 
-export default {
-    data() {
-        return {
-            imageGame: '',
-            nameGame: '',
-            ratingGame: '',
-            commentGame: '',
-            game: [],
-            info: ''
-        }
-    },
-    methods: {
-        Addgame() {
-            if (this.imageGame == '') {
-                this.info = 'Загрузите изображение'
-                return
-            } else if (this.nameGame == ''){
-                this.info = 'Введите название игры'
-                return
-            } else if (this.ratingGame == '') {
-                this.info = 'Поставьте рейтинг'
-                return
-            }
-            const store = useGameStore()
+const imageGame = ref('')
+const nameGame = ref('')
+const ratingGame = ref('')
+const commentGame = ref('')
+const info = ref('')
+const store = useGameStore()
 
-            store.addGame({
-                image: this.imageGame,
-                name: this.nameGame,
-                rating: this.ratingGame,
-                comment: this.commentGame
-            })
-            this.info = 'Игра успешно добавлена'
-            this.nameGame = ''
-            this.ratingGame = ''
-            this.commentGame = ''
-            this.imageGame = ''
-        },
-        handleImage(event) {
-            const file = event.target.files[0]
-            if (!file) return
+const clearForm = () => {
+    nameGame.value = ''
+    ratingGame.value = ''
+    commentGame.value = ''
+    imageGame.value = ''
+}
 
-            this.imageGame = URL.createObjectURL(file)
-        }
-    },
+const addGame = () => {
+    if (imageGame.value === '') {
+        info.value = 'Загрузите изображение'
+        return
+    } else if (nameGame.value === ''){
+        info.value = 'Введите название игры'
+        return
+    } else if (ratingGame.value === '') {
+        info.value = 'Поставьте рейтинг'
+        return
+    }
+    
+    store.addGame({
+        image: imageGame.value,
+        name: nameGame.value,
+        rating: ratingGame.value,
+        comment: commentGame.value
+    })
+    info.value = 'Игра успешно добавлена'
+    clearForm()
+}
+
+const handleImage = (event: Event) => {
+    const target = event.target as HTMLInputElement
+    const file = target.files?.[0]
+    if (!file) return
+    imageGame.value = URL.createObjectURL(file)
 }
 
 </script>

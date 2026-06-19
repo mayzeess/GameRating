@@ -5,30 +5,26 @@
             <h2 class="font-bold">Название игры: {{ game.name }}</h2>
             <p>Рейтинг: {{ game.rating }}</p>
             <p>Комментарий: {{ game.comment }}</p>
-            <button class="button" @click="DeleteGame">Удалить</button>
+            <button class="button" @click="deleteGame">Удалить</button>
         </div>
     </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import { useGameStore } from '@/stores/gameStore'
+import type { GameType } from '@/types/Game'
 
-export default {
-    props: {
-        game: {
-            type: Object,
-            required: true
-        },
-        index: {
-            type: Number,
-            required: true
-        },
-    },
-    methods: {
-        DeleteGame() {
-            const store = useGameStore()
-            store.deleteGame(this.index)
-        }
-    }
+interface GameCardProps {
+    game: GameType
+    index: number
 }
+
+const props = defineProps<GameCardProps>()
+
+const store = useGameStore()
+
+const deleteGame = () => {
+    store.deleteGame(props.index)
+}
+
 </script>

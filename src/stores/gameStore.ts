@@ -1,19 +1,13 @@
 import { defineStore } from 'pinia'
-
-interface Game {
-    image: string
-    name: string
-    rating: string
-    comment: string
-}
+import type { GameType } from '@/types/Game'
 
 export const useGameStore = defineStore('games', {
     state: () => ({
-        games: [] as Game[]
+        games: [] as GameType[]
     }),
 
     actions: {
-        addGame(game: Game) {
+        addGame(game: GameType) {
             this.games.push(game)
         },
 
