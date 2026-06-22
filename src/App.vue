@@ -1,7 +1,7 @@
 
 <template>
   <div class="min-h-screen bg-black">
-    <nav class="flex gap-6 bg-black p-4 justify-center border-1 border-purple-500 text-white">
+    <nav class="flex gap-15 bg-black p-4 justify-center border-1 border-purple-500 text-white text-xl">
       <router-link to="/" class="hover:text-purple-600">
         Главная
       </router-link>

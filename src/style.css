@@ -5,17 +5,29 @@
 }
 
 .p {
-    @apply text-white text-center text-left text-2xl mt-10;
+    @apply text-white text-left text-2xl mt-8 hover:text-purple-300;
 }
 
-.main-div{
-    @apply flex flex-col items-center pt-10;
+.main-div {
+    @apply flex flex-col items-center;
 }
 
-.list-gamecard{
+.list-gamecard {
     @apply w-40 h-50 object-cover rounded-lg;
 }
 
-.button{
-    @apply items-center text-white border border-purple-500 rounded-lg p-2 m-3 text-xl hover:text-black hover:bg-purple-600 cursor-pointer;
+.button {
+    @apply items-center text-white border border-purple-500 rounded-lg p-2 text-xl hover:text-black hover:bg-purple-600 cursor-pointer;
+}
+
+.input {
+    @apply border-2 border-purple-500 rounded-md focus:outline-none focus:border-purple-900;
+}
+
+.home-card {
+    @apply text-white border border-purple-600 rounded-lg p-4 w-full md:w-100 min-h-50 flex flex-col bg-gray-900 hover:-translate-y-2 duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)];
+}
+
+.h2 {
+    @apply text-purple-600 text-2xl text-center font-bold mb-4 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)];
 }

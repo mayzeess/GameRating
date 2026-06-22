@@ -1,14 +1,15 @@
 <template>
-    <div class="main-div">
-        <form class="flex flex-col gap-6 mt-10 text-white mb-3">
-            <img :src="imageGame" class="list-gamecard mx-auto"/>
-            <input class="border-2 border-purple-500 rounded-md" type="file" accept="image/*" @change="handleImage">
-            <input class="border-2 border-purple-500 rounded-md" type="text" placeholder="Название" v-model="nameGame">
-            <input class="border-2 border-purple-500 rounded-md" type="number" placeholder="Рейтинг" v-model="ratingGame">
-            <input class="border-2 border-purple-500 rounded-md" type="text" placeholder="Комментарий" v-model="commentGame">
-        </form>
-        <p class="p">{{ info }}</p>
-        <button class="button" @click="GameEdit">Подтвердить</button>
+    <div class="main-div  pt-10">
+    <p class="text-white text-center text-left text-2xl" v-if="(info != '')">{{ info }}</p>
+    <form class="w-full max-w-lg flex flex-col gap-4 mt-8 text-white px-4 text-lg">
+        <img :src="imageGame" class="max-w-full max-h-[20vh] lg:max-h-[25vh] 2xl:max-h-[35vh] block rounded-lg mx-auto" v-if="imageGame != ''"/>
+        <input class="cursor-pointer input" type="file" accept="image/*" @change="handleImage">
+        <input class="input" type="text" placeholder="Название" v-model="nameGame">
+        <input class="accent-purple-600 cursor-pointer" type="range" min="1" max="10" step="1" placeholder="Рейтинг" v-model.number="ratingGame">
+        <p class="text-xl mx-auto font-bold">Оценка игры: {{ ratingGame }}/10</p>
+        <textarea class="resize-y input" placeholder="Комментарий" v-model="commentGame"></textarea>
+    </form>
+        <button class="button m-3" @click="GameEdit">Подтвердить</button>
     </div>
 </template>
 
@@ -26,10 +27,10 @@ if (!game) {
     throw new Error('Игра не найдена') 
 }
 
-const imageGame = ref(game?.image)
-const nameGame = ref(game?.name)
-const ratingGame = ref(game?.rating)
-const commentGame = ref(game?.comment)
+const imageGame = ref(game.image)
+const nameGame = ref(game.name)
+const ratingGame = ref(game.rating)
+const commentGame = ref(game.comment)
 const info = ref('')
 
 const handleImage = (event: Event) => {
@@ -46,12 +47,8 @@ const GameEdit = () => {
     } else if (nameGame.value === ''){
         info.value = 'Введите название игры'
         return
-    } else if (ratingGame.value === '') {
-        info.value = 'Поставьте рейтинг'
-        return
     }
    
-
     store.editGame({
         id: gameId,
         image: imageGame.value,

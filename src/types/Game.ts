@@ -2,6 +2,6 @@ export interface GameType {
     id: number
     image: string
     name: string
-    rating: string
+    rating: number
     comment: string
 }
