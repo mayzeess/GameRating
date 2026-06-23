@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 .h1 {
-    @apply text-purple-600 text-4xl text-center font-bold;
+    @apply text-purple-600 text-4xl text-center font-bold drop-shadow-[0_0_20px_rgba(168,85,247,1)];
 }
 
 .p {
@@ -17,7 +17,7 @@
 }
 
 .button {
-    @apply items-center text-white border border-purple-500 rounded-lg p-2 text-xl hover:text-black hover:bg-purple-600 cursor-pointer;
+    @apply items-center text-white border border-purple-500 rounded-lg p-2 text-xl hover:text-black hover:bg-purple-600 cursor-pointer hover:scale-120 duration-500 hover:shadow-[0_0_300px_rgba(168,85,247,35)];
 }
 
 .input {
@@ -25,7 +25,7 @@
 }
 
 .home-card {
-    @apply text-white border border-purple-600 rounded-lg p-4 w-full md:w-100 min-h-50 flex flex-col bg-gray-900 hover:-translate-y-2 duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.5)];
+    @apply text-white border border-purple-600 rounded-lg p-4 w-full md:w-100 min-h-50 flex flex-col bg-gray-900 hover:-translate-y-1 duration-800 hover:shadow-[0_0_300px_rgba(168,85,247,35)];
 }
 
 .h2 {
