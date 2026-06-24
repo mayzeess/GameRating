@@ -39,3 +39,7 @@
 .a-ref{
     @apply cursor-pointer hover:text-purple-600 w-fit;
 }
+
+.div-gameeCard {
+    @apply hover:bg-gray-900 cursor-pointer text-white border border-purple-500 rounded-lg p-2 m-3 text-base w-full max-w-4xl flex px-4 hover:scale-102 duration-500;
+}
