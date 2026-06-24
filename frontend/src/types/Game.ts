@@ -4,4 +4,6 @@ export interface GameType {
     name: string
     rating: number
     comment: string
+    createAt?: string
+    updatedAt?: string
 }
