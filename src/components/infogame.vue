@@ -9,11 +9,13 @@
             </div>
         </div>
     </div>
+    <isError v-else />
 </template>
 
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
 import { useGameStore } from '@/stores/gameStore';
+import isError from './isError.vue';
 
 const route = useRoute()
 const store = useGameStore()
