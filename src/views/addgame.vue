@@ -1,10 +1,10 @@
 <template>
     <div class="main-div">
-        <AddgameComp />
+        <addGame />
     </div>
 </template>
 
 <script setup lang="ts">
-import AddgameComp from '@/components/addgameComp.vue';
+import addGame from '@/components/addgame.vue';
 
 </script>

@@ -4,11 +4,10 @@
         <p class="p mb-10">Здесь представлена разная информация о авторе. Также тут находятся контакты и
             разные ссылки на социальные сети.
         </p>
-        <Aboutinfo />
+        <aboutInfo />
     </div>
 </template>
 
 <script setup lang="ts">
-import Aboutinfo from '@/components/aboutinfo.vue';
-
+import aboutInfo from '@/components/aboutinfo.vue';
 </script>
