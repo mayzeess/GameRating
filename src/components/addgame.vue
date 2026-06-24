@@ -24,11 +24,17 @@ const commentGame = ref('')
 const info = ref('Добавление игры')
 const store = useGameStore()
 
+let imageUrl = ''
+
 const clearForm = () => {
     nameGame.value = ''
     ratingGame.value = 1
     commentGame.value = ''
     imageGame.value = ''
+    if (imageUrl) {
+        URL.revokeObjectURL(imageUrl)
+        imageUrl = ''
+    }
 }
 
 const addGame = () => {
@@ -57,7 +63,12 @@ const handleImage = (event: Event) => {
     const target = event.target as HTMLInputElement
     const file = target.files?.[0]
     if (!file) return
-    imageGame.value = URL.createObjectURL(file)
+    if (imageUrl){
+        URL.revokeObjectURL(imageUrl)
+    }
+    const newUrl = URL.createObjectURL(file)
+    imageGame.value = newUrl
+    imageUrl = newUrl
 }
 
 </script>
