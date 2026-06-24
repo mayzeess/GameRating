@@ -31,10 +31,7 @@ const clearForm = () => {
     ratingGame.value = 1
     commentGame.value = ''
     imageGame.value = ''
-    if (imageUrl) {
-        URL.revokeObjectURL(imageUrl)
-        imageUrl = ''
-    }
+    imageUrl = ''
 }
 
 const addGame = () => {
