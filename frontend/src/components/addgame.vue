@@ -22,50 +22,51 @@ const nameGame = ref('')
 const ratingGame = ref(1)
 const commentGame = ref('')
 const info = ref('Добавление игры')
-const store = useGameStore()
+const selectedFile = ref<File | null>(null)
 
-let imageUrl = ''
+const store = useGameStore()
 
 const clearForm = () => {
     nameGame.value = ''
     ratingGame.value = 1
     commentGame.value = ''
     imageGame.value = ''
-    imageUrl = ''
+    selectedFile.value = null
 }
 
-const addGame = () => {
-    if (!imageGame.value) {
+const addGame = async () => {
+    if (!selectedFile.value) {
         info.value = 'Загрузите изображение'
         return
-    } else if (!nameGame.value){
+    } else if (!nameGame.value.trim()){
         info.value = 'Введите название игры'
         return
-    }
-    if (commentGame.value === ''){
+    } 
+    if (!commentGame.value.trim()){
         commentGame.value = 'Без комментариев'
     }
-    store.addGame({
-        id: Date.now(),
-        image: imageGame.value,
-        name: nameGame.value,
-        rating: ratingGame.value,
-        comment: commentGame.value
-    })
-    info.value = 'Игра успешно добавлена'
-    clearForm()
+    const formData = new FormData()
+
+    formData.append('image', selectedFile.value)
+    formData.append('name', nameGame.value.trim())
+    formData.append('rating', String(ratingGame.value))
+    formData.append('comment', commentGame.value.trim())
+
+    try {
+        await store.addGame(formData)
+        info.value = 'Игра успешно добавлена'
+        clearForm()
+    } catch {
+        info.value = 'Ошибка добавления игры'
+    }
 }
 
 const handleImage = (event: Event) => {
     const target = event.target as HTMLInputElement
     const file = target.files?.[0]
     if (!file) return
-    if (imageUrl){
-        URL.revokeObjectURL(imageUrl)
-    }
-    const newUrl = URL.createObjectURL(file)
-    imageGame.value = newUrl
-    imageUrl = newUrl
+    selectedFile.value = file
+    imageGame.value = URL.createObjectURL(file)
 }
 
 </script>

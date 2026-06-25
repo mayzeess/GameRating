@@ -39,3 +39,15 @@
 .a-ref{
     @apply cursor-pointer hover:text-purple-600 w-fit;
 }
+
+.info-game{
+    @apply hover:bg-gray-900 cursor-pointer text-white border border-purple-500 rounded-lg p-2 m-3 text-base w-full max-w-4xl flex px-4 hover:scale-102 duration-500;
+}
+
+.img-infogame {
+    @apply w-full max-w-sm md:max-w-md lg:w-[35%] max-h-[70vh] rounded-lg object-contain mx-auto lg:mx-0 duration-500 hover:scale-105;
+}
+
+.name-game {
+    @apply text-purple-600 text-4xl font-bold mb-4 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)];
+}
