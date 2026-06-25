@@ -45,13 +45,15 @@ const addGame = async () => {
     if (!commentGame.value.trim()){
         commentGame.value = 'Без комментариев'
     }
+    const formData = new FormData()
+
+    formData.append('image', selectedFile.value)
+    formData.append('name', nameGame.value.trim())
+    formData.append('rating', String(ratingGame.value))
+    formData.append('comment', commentGame.value.trim())
+
     try {
-        await store.addGame({
-            image: 'image',
-            name: nameGame.value.trim(),
-            rating: ratingGame.value,
-            comment: commentGame.value.trim()
-        })
+        await store.addGame(formData)
         info.value = 'Игра успешно добавлена'
         clearForm()
     } catch {

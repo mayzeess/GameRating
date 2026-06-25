@@ -39,13 +39,10 @@ export const useGameStore = defineStore('games', {
             }
             return await response.json() as GameType
         },
-        async addGame(game: CreateGame) {
+        async addGame(formData: FormData) {
             const response = await fetch(`${API_URL}/api/games`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(game)
+                body: formData
             })
             
             if (!response.ok) {

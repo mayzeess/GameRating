@@ -38,7 +38,7 @@ const upload = multer({
     storage,
     fileFilter: (_req, file, callback) => {
         if (!file.mimetype.startsWith('image/')) {
-            callback(new Error('Можно загружать только изображения'))
+            callback(new Error('можно загружать только изображения'))
             return
         }
 
