@@ -2,12 +2,6 @@ import { defineStore } from 'pinia'
 import type { GameType } from '@/types/Game'
 import { API_URL } from '@/config/api'
 
-type CreateGame = {
-    image: string
-    name: string
-    rating: number
-    comment: string
-}
 type UpdateGameData = Omit<GameType, 'id' | 'createdAt' | 'updatedAt'>
 export const useGameStore = defineStore('games', {
     state: () => ({

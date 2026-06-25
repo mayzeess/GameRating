@@ -46,6 +46,18 @@ const upload = multer({
     }
 })
 
+const deleteImageFile = (imageUrl: string) => {
+    const fileName = imageUrl.split('/uploads/')[1]
+
+    if (!fileName) return
+
+    const filePath = path.join(uploadsPath, fileName)
+
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+    }
+}
+
 app.get('/', (_req, res) => {
     res.send('работает')
 })
@@ -126,6 +138,8 @@ app.delete('/api/games/:id', async (req, res) => {
         res.status(404).json({ message: 'игра не найдена' })
         return
     }
+    deleteImageFile(game.image)
+
     await prisma.game.delete({
         where: {id}
     })
@@ -162,7 +176,7 @@ app.patch('/api/games/:id', async (req, res) => {
             image: String(image).trim()
         }
     })
-
+    
     res.json(updatedGame)
 })
 
