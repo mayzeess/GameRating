@@ -2,7 +2,7 @@
     <p class="text-white p-5 text-xl text-center" v-if="isLoading">Загрузка...</p>
     <div v-else-if="game" class="mx-auto text-white px-4 py-6 max-w-6xl">
         <div class="flex flex-col lg:flex-row gap-10">
-            <img :src="game.image" class="w-full max-w-sm md:max-w-md lg:w-[35%] max-h-[70vh] rounded-lg object-contain mx-auto lg:mx-0 duration-500 hover:scale-105"/>
+            <img :src="game.image" class="img-infogame"/>
             <div class="flex-1">
                 <h2 class="font-bold text-4xl mb-6">Название игры: {{ game.name }}</h2>
                 <div class="text-2xl mb-6">Рейтинг: {{ game.rating }}/10</div>
