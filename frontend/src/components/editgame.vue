@@ -33,11 +33,13 @@ const nameGame = ref('')
 const ratingGame = ref(1)
 const commentGame = ref('')
 const info = ref('')
+const selectedFile = ref<File | null>(null)
 
 const handleImage = (event: Event) => {
     const target = event.target as HTMLInputElement
     const file = target.files?.[0]
     if (!file) return
+    selectedFile.value = file
     imageGame.value = URL.createObjectURL(file)
 }
 
@@ -77,13 +79,16 @@ const GameEdit = async () => {
         info.value = 'ошибка'
         return
     }
+    const formData = new FormData()
+
+    formData.append('name', nameGame.value.trim())
+    formData.append('rating', String(ratingGame.value))
+    formData.append('comment', commentGame.value.trim())
+    if (selectedFile.value){
+        formData.append('image', selectedFile.value)
+    }
     try {
-        await store.editGame(game.value.id, {
-            image: imageGame.value,
-            name: nameGame.value.trim(),
-            rating: ratingGame.value,
-            comment: commentGame.value
-        })
+        await store.editGame(game.value.id, formData)
         info.value = 'Изменения применены'
     } catch {
         info.value = 'Проиозошла ошибка изменения игры'

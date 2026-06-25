@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import type { GameType } from '@/types/Game'
 import { API_URL } from '@/config/api'
 
-type UpdateGameData = Omit<GameType, 'id' | 'createdAt' | 'updatedAt'>
 export const useGameStore = defineStore('games', {
     state: () => ({
         games: [] as GameType[],
@@ -60,24 +59,23 @@ export const useGameStore = defineStore('games', {
             this.games = this.games.filter(game => game.id != id)
         },
         
-        async editGame(id: number, updatedGame: UpdateGameData) {
+        async editGame(id: number, formData: FormData) {
             const response = await fetch(`${API_URL}/api/games/${id}`, {
                 method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(updatedGame)
+                body: formData
             })
             
             if (!response.ok) {
-                throw new Error('Не удалось удалить игру')
+                throw new Error('Не удалось изменить игру')
             }
             
-            const GameApi = await response.json() as GameType
+            const updateGame = await response.json() as GameType
             const index = this.games.findIndex(game => game.id === id)
-            this.games[index] = GameApi
-
-            return GameApi
+            if (index !== -1){
+                this.games[index] = updateGame
+            }
+ 
+            return updateGame
         }
     }
 })

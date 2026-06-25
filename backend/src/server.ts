@@ -147,13 +147,13 @@ app.delete('/api/games/:id', async (req, res) => {
     res.json({messadge: 'Игра удалена'})
 })
 
-app.patch('/api/games/:id', async (req, res) => {
+app.patch('/api/games/:id', upload.single('image'), async (req, res) => {
     const id = Number(req.params.id)
     if (Number.isNaN(id)) {
         res.status(400).json({ message: 'нет такого id' })
         return
     }
-    const { name, rating, comment, image } = req.body
+    const { name, rating, comment } = req.body
     const ratingNumber = Number(rating)
     
     const game = await prisma.game.findUnique({
@@ -166,17 +166,26 @@ app.patch('/api/games/:id', async (req, res) => {
         res.status(404).json({ message: 'игра не найдена' })
         return
     }
+    let imageUrl = game.image
     
+    if (req.file){
+        imageUrl = `${API_URL}/uploads/${req.file.filename}`
+    }
+
     const updatedGame = await prisma.game.update({
         where: {id},
         data: {
             name: String(name).trim(),
             rating: ratingNumber,
             comment: String(comment || '').trim() || 'Без комментариев',
-            image: String(image).trim()
+            image: imageUrl
         }
     })
-    
+
+    if (req.file){
+        deleteImageFile(game.image)
+    }
+
     res.json(updatedGame)
 })
 
