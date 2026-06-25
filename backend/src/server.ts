@@ -97,3 +97,36 @@ app.delete('/api/games/:id', async (req, res) => {
 
     res.json({messadge: 'Игра удалена'})
 })
+
+app.patch('/api/games/:id', async (req, res) => {
+    const id = Number(req.params.id)
+    if (Number.isNaN(id)) {
+        res.status(400).json({ message: 'нет такого id' })
+        return
+    }
+    const { name, rating, comment, image } = req.body
+    const ratingNumber = Number(rating)
+    
+    const game = await prisma.game.findUnique({
+        where: {
+            id: id
+        }
+    })
+
+    if (!game) {
+        res.status(404).json({ message: 'игра не найдена' })
+        return
+    }
+    
+    const updatedGame = await prisma.game.update({
+        where: {id},
+        data: {
+            name: String(name).trim(),
+            rating: ratingNumber,
+            comment: String(comment || '').trim() || 'Без комментариев',
+            image: String(image).trim()
+        }
+    })
+
+    res.json(updatedGame)
+})

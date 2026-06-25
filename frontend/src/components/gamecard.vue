@@ -1,7 +1,5 @@
 <template>
-    <div @click="InfoGame"
-    class="hover:bg-gray-900 cursor-pointer text-white border border-purple-500 rounded-lg p-2 m-3 
-    text-base w-full max-w-4xl flex px-4 hover:scale-102 duration-500">
+    <div @click="InfoGame" class="info-game">
         <img :src="game.image" class="list-gamecard"/>
         <div class="ml-15 flex flex-col gap-6 justify-center flex-1">
             <h2 class="font-bold">Название игры: {{ game.name }}</h2>

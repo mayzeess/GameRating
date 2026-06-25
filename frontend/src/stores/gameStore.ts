@@ -8,7 +8,7 @@ type CreateGame = {
     rating: number
     comment: string
 }
-
+type UpdateGameData = Omit<GameType, 'id' | 'createdAt' | 'updatedAt'>
 export const useGameStore = defineStore('games', {
     state: () => ({
         games: [] as GameType[],
@@ -68,14 +68,25 @@ export const useGameStore = defineStore('games', {
             
             this.games = this.games.filter(game => game.id != id)
         },
-
-        editGame(updatedGame: GameType) {
-            const index = this.games.findIndex(
-                game => game.id === updatedGame.id
-            )
-            if (index !== -1) {
-                this.games[index] = updatedGame
+        
+        async editGame(id: number, updatedGame: UpdateGameData) {
+            const response = await fetch(`${API_URL}/api/games/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedGame)
+            })
+            
+            if (!response.ok) {
+                throw new Error('Не удалось удалить игру')
             }
+            
+            const GameApi = await response.json() as GameType
+            const index = this.games.findIndex(game => game.id === id)
+            this.games[index] = GameApi
+
+            return GameApi
         }
     }
 })
