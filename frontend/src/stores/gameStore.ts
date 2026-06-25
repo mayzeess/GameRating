@@ -25,13 +25,19 @@ export const useGameStore = defineStore('games', {
                 if (!response.ok){
                     throw new Error('Ошибка загрузки игр')
                 }
-                
                 this.games = await response.json()
             } catch {
                 this.error = 'Ошибка загрузки игры'
             } finally {
                 this.isLoading = false
             }
+        },
+        async fetchGameById(id: Number){
+            const response = await fetch(`${API_URL}/api/games/${id}`)
+            if (!response.ok){
+                throw new Error('такой игры не найдено')
+            }
+            return await response.json() as GameType
         },
         async addGame(game: CreateGame) {
             const response = await fetch(`${API_URL}/api/games`, {
