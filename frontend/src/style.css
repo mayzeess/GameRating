@@ -47,3 +47,7 @@
 .img-infogame {
     @apply w-full max-w-sm md:max-w-md lg:w-[35%] max-h-[70vh] rounded-lg object-contain mx-auto lg:mx-0 duration-500 hover:scale-105;
 }
+
+.name-game {
+    @apply text-purple-600 text-4xl font-bold mb-4 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)];
+}

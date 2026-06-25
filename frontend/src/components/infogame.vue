@@ -4,9 +4,9 @@
         <div class="flex flex-col lg:flex-row gap-10">
             <img :src="game.image" class="img-infogame"/>
             <div class="flex-1">
-                <h2 class="font-bold text-4xl mb-6">Название игры: {{ game.name }}</h2>
-                <div class="text-2xl mb-6">Рейтинг: {{ game.rating }}/10</div>
-                <div class="text-xl mb-2">Комментарий: {{ game.comment }}</div>
+                <h2 class="name-game">{{ game.name }}</h2>
+                <div class="text-2xl mb-6 hover:text-purple-300">Рейтинг: {{ game.rating }}/10</div>
+                <div class="text-xl mb-2 hover:text-purple-300">Комментарий: {{ game.comment }}</div>
             </div>
         </div>
     </div>

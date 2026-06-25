@@ -2,7 +2,7 @@
     <div @click="InfoGame" class="info-game">
         <img :src="game.image" class="list-gamecard"/>
         <div class="ml-15 flex flex-col gap-6 justify-center flex-1">
-            <h2 class="font-bold">Название игры: {{ game.name }}</h2>
+            <h2 class="h2">{{ game.name }}</h2>
             <p>Рейтинг: {{ game.rating }}/10</p>
             <p>Комментарий: {{ game.comment }}</p>
         </div>
