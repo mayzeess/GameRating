@@ -51,8 +51,16 @@ export const useGameStore = defineStore('games', {
             return createdGame
         },
 
-        deleteGame(id: number) {
-            this.games = this.games.filter(game => game.id !== id)
+        async deleteGame(id: number) {
+            const response = await fetch(`${API_URL}/api/games/${id}`, {
+                method: 'DELETE'
+            })
+            
+            if (!response.ok) {
+                throw new Error('Не удалось удалить игру')
+            }
+            
+            this.games = this.games.filter(game => game.id != id)
         },
 
         editGame(updatedGame: GameType) {

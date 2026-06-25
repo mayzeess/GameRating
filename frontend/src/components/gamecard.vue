@@ -9,8 +9,7 @@
             <p>Комментарий: {{ game.comment }}</p>
         </div>
         <div class="flex flex-col items-center self-center">
-            <button class="button m-3" 
-            @click.stop="deleteGame">Удалить</button>
+            <button class="button m-3" @click.stop="deleteGame">Удалить</button>
             <button class="button m-3" @click.stop="editGame">Редактировать</button>
         </div>
     </div>
@@ -29,8 +28,12 @@ const props = defineProps<GameCardProps>()
 
 const store = useGameStore()
 
-const deleteGame = () => {
-    store.deleteGame(props.game.id)
+const deleteGame = async () => {
+    try {
+        await store.deleteGame(props.game.id)
+    } catch {
+        alert('не удалось удалить игру')
+    }
 }
 
 const router = useRouter()
