@@ -22,6 +22,8 @@ const nameGame = ref('')
 const ratingGame = ref(1)
 const commentGame = ref('')
 const info = ref('Добавление игры')
+const selectedFile = ref<File | null>(null)
+
 const store = useGameStore()
 
 const clearForm = () => {
@@ -29,34 +31,39 @@ const clearForm = () => {
     ratingGame.value = 1
     commentGame.value = ''
     imageGame.value = ''
+    selectedFile.value = null
 }
 
-const addGame = () => {
-    if (imageGame.value === '') {
+const addGame = async () => {
+    if (!selectedFile.value) {
         info.value = 'Загрузите изображение'
         return
-    } else if (nameGame.value === ''){
+    } else if (!nameGame.value.trim()){
         info.value = 'Введите название игры'
         return
-    }
-    if (commentGame.value == ''){
+    } 
+    if (!commentGame.value.trim()){
         commentGame.value = 'Без комментариев'
     }
-    store.addGame({
-        id: Date.now(),
-        image: imageGame.value,
-        name: nameGame.value,
-        rating: ratingGame.value,
-        comment: commentGame.value
-    })
-    info.value = 'Игра успешно добавлена'
-    clearForm()
+    try {
+        await store.addGame({
+            image: 'image',
+            name: nameGame.value.trim(),
+            rating: ratingGame.value,
+            comment: commentGame.value.trim()
+        })
+        info.value = 'Игра успешно добавлена'
+        clearForm()
+    } catch {
+        info.value = 'Ошибка добавления игры'
+    }
 }
 
 const handleImage = (event: Event) => {
     const target = event.target as HTMLInputElement
     const file = target.files?.[0]
     if (!file) return
+    selectedFile.value = file
     imageGame.value = URL.createObjectURL(file)
 }
 

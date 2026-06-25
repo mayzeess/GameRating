@@ -2,6 +2,13 @@ import { defineStore } from 'pinia'
 import type { GameType } from '@/types/Game'
 import { API_URL } from '@/config/api'
 
+type CreateGame = {
+    image: string
+    name: string
+    rating: number
+    comment: string
+}
+
 export const useGameStore = defineStore('games', {
     state: () => ({
         games: [] as GameType[],
@@ -26,8 +33,22 @@ export const useGameStore = defineStore('games', {
                 this.isLoading = false
             }
         },
-        addGame(game: GameType) {
-            this.games.push(game)
+        async addGame(game: CreateGame) {
+            const response = await fetch(`${API_URL}/api/games`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(game)
+            })
+            
+            if (!response.ok) {
+                throw new Error('Не удалось добавить игру')
+            }
+
+            const createdGame = await response.json() as GameType
+            this.games.unshift(createdGame)
+            return createdGame
         },
 
         deleteGame(id: number) {
